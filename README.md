@@ -1,79 +1,100 @@
-Soluciones Móviles II
+# SM2_Examen_CICD 
 
-## Examen Unidad 3 – Automatización con GitHub Actions
+**Nombre:** Ximena Ortiz  
+**Curso:** Soluciones Moviles II
 
-**Estudiante:** Ximena Ortiz Fernández
-
-**Fecha:** 18 de Noviembre del 2025
-
-**Repositorio:** [https://github.com/ximena-ortiz/SM2_ExamenUnidad3](https://github.com/ximena-ortiz/SM2_ExamenUnidad3)
+![CI/CD Status](https://github.com/ximena-ortiz/SM2_Examen_CICD/workflows/Mobile%20CI/CD%20Pipeline/badge.svg) 
 
 ---
 
-### Pruebas Frontend
+## Repositorio
 
-Se encuentran dentro de la carpeta test, dentro de cada uno se encuentran los diferentes tests implementados en el frontend del proyecto
+**URL del Repositorio:** [https://github.com/ximena-ortiz/SM2_Examen_CICD](https://github.com/ximena-ortiz/SM2_Examen_CICD)
+
+---
+
+## Parte 1: Lógica y Pruebas Unitarias
+
+### Funciones Implementadas
+
+Se creó la clase `Validator` con las siguientes funciones utilitarias:
+
+| # | Función | Descripción | Criterio de Prueba |
+|---|---------|-------------|-------------------|
+| 1 | `isValidEmail()` | Valida formato de email | Retorna true si contiene "@" y "." |
+| 2 | `isStrongPassword()` | Valida seguridad de contraseña | Retorna true si tiene más de 6 caracteres |
+| 3 | `calcularDescuento()` | Calcula precio con descuento | Retorna el precio final después de aplicar el porcentaje |
+| 4 | `isRangoValido()` | Valida rango numérico | Retorna true si el número está entre 1 y 10 (inclusive) |
+| 5 | `toUpperText()` | Convierte texto a mayúsculas | Retorna el texto completamente capitalizado |
+
+### Código de la Clase Validator
+
+![alt text](image.png)
+
+### Tests Unitarios
+
+![alt text](image-1.png)
+
+### Evidencia de Tests Locales
+
+Los tests se ejecutaron localmente con el comando flutter test y todos pasaron exitosamente:
+
+![alt text](image-2.png)
+
+---
+
+### Audite la calidad del código (Linting).
+
+![alt text](image-3.png)
+
+---
+
+## Parte 2: Configuración del Pipeline CI/CD
+
+### Workflow de GitHub Actions
+
+Se configuró el archivo `.github/workflows/ci-pipeline.yml` con el siguiente contenido:
 
 ![alt text](image-4.png)
 
 ---
 
-### Pruebas Backend
+## Parte 3: Evidencias de Ejecución
 
-Se encuentran dentro de src/test, dentro de este archivo se encuentran los test necesarios para el funcionamiento del backend
+### Badge de Estado del Pipeline
+
+![CI/CD Status](https://github.com/ximena-ortiz/SM2_Examen_CICD/workflows/Mobile%20CI/CD%20Pipeline/badge.svg) 
+
+**Estado:** ✅ **Passing** - El pipeline se ejecuta correctamente en cada push.
+
+### Evidencia de Tests Unitarios
+
+El log de GitHub Actions muestra que los 5 tests unitarios pasaron exitosamente:
 
 ![alt text](image-5.png)
 
-### Ejecución de Pruebas localmente
+### Evidencia de Construcción y Artefacto
 
-A nivel de frontend se ejecutarion las pruebas con el comando `flutter test`
-
-
-![alt text](image-1.png)
-
-EN el Backend primero se instalaron las dependencias con el comando `npm install` y luego se ejecutaron los tests con el comando `npm run test`
-
-![alt text](image-3.png)
-
-
-### Workflow en GitHub Actions (`.github/workflows/quality-check-frontend.yml`)
-
-El workflow quality-check-frontend automatiza la validación del código del frontend desarrollado en Flutter cada vez que se realizan cambios en la carpeta Frontend/. Este flujo configura el entorno de Flutter, instala dependencias, analiza la calidad del código con flutter analyze y ejecuta las pruebas unitarias, garantizando que la aplicación móvil mantenga su correcto funcionamiento y buenas prácticas.
-
-![alt text](image-7.png)
-
-### Workflow en GitHub Actions (`.github/workflows/quality-check-backend.yml`)
-
-El workflow quality-check-backend realiza integración continua sobre el backend en Node.js cuando se modifican archivos dentro de Backend/, instalando dependencias y ejecutando las pruebas definidas mediante npm test. Ambos workflows aseguran que tanto el frontend como el backend se mantengan estables, funcionales y libres de errores en cada actualización del repositorio.
+El APK se generó exitosamente y está disponible para descarga en la sección de Artifacts:
 
 ![alt text](image-6.png)
 
-
-
-### Ejecución Automática del Workflow
-
-Para validar el funcionamiento automático:
-
-1. Se realizó un commit a la rama `master`.
-2. GitHub detectó el cambio y ejecutó el workflow automáticamente.
-3. Se verificó la ejecución desde la pestaña Actions del repositorio.
-
+**Detalles del Artefacto:**
+- **Nombre:** app-release
+- **Formato:** APK 
+- **Tamaño:** 52.4 MB
 
 ---
 
-### Explicación de lo Realizado
+### Etapas del Pipeline
 
-El proceso implementado asegura que cada modificación al proyecto se valide automáticamente:
-
-### flutter analyze
-
-Verifica que el código cumpla buenas prácticas y no contenga errores.
-
-### flutter test
-
-Ejecuta las pruebas unitarias para asegurar que las funciones clave siguen funcionando.
+1. **Checkout Code:** Descarga el código fuente del repositorio
+2. **Setup Flutter:** Configura el entorno Flutter 3.35.5
+3. **Install Dependencies:** Ejecuta flutter pub get
+4. **Code Quality Check:** Analiza el código con flutter analyze
+5. **Run Unit Tests:** Ejecuta las pruebas unitarias con flutter test
+6. **Build Application:** Compila el APK con flutter build apk
+7. **Upload Artifact:** Sube el APK generado como artefacto descargable
 
 ---
-
-
 
